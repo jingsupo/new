@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Git Developer Pages
+title: python及前端学习日志
 navbar: false
 ---
 
