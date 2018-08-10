@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Git Rev News
+title: News
 ---
 
-# Latest edition
+# Latest news
 
 {% for post in site.posts limit:1 %}
   {% include news_item.html %}
