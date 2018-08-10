@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Git Rev News Archive
+title: Archive
 ---
 
 # Archive
 
-Here you can see all the previous editions.
+Here you can see all the previous posts.
 
 <ul>
   {% for post in site.posts %}
