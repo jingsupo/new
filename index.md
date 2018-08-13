@@ -31,7 +31,7 @@
 	
 <div class='d1'><img alt="Welcome" border="0" src="images/welcome.jpg" width="300" height="100"></div>
 <div class='d2'>欢迎光临！精品屋改版升级中，请稍后访问！</div>
-<div class='d3'><a target="_blank" href="jsp.im">jsp.im</a></div>
+<div class='d3'><a target="_blank" href="http://jsp.im">jsp.im</a></div>
 	
 </body>
 </html>
