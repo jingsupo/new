@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        ul {
+            margin: 0 0;
+            padding: 0;
+            list-style: none;
+        }
+        a {
+            width: 200px;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            text-indent: 10px;
+            line-height: 30px;
+        }
+        .top-level {
+            background: #3366cc;
+            border-bottom: 1px solid white;
+        }
+        .list li ul {
+            display: none;
+            width: 200px;
+            background: #779bf6;
+            text-indent: 10px;
+            line-height: 30px;
+        }
+        .list li ul li {
+            border-bottom: 1px solid white;
+        }
+        .list li ul li:hover {
+            background: orange;
+        }
+    </style>
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/jquery.color.js"></script>
+    <script>
+        $(function () {
+            var $oTopLevel = $('.top-level');
+            $oTopLevel.click(function () {
+                $(this).next().slideToggle().parent().siblings().children('ul').slideUp();
+            });
+        })
+    </script>
+    <title>发现音乐</title>
+</head>
+<body>
+    <ul class="list">
+        <li>
+            <a href="#" class="top-level">水果</a>
+            <ul>
+                <li><a href="#">苹果</a></li>
+                <li><a href="#">香蕉</a></li>
+                <li><a href="#">梨</a></li>
+                <li><a href="#">桃</a></li>
+                <li><a href="#">猕猴桃</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="top-level">蔬菜</a>
+            <ul>
+                <li><a href="#">西红柿</a></li>
+                <li><a href="#">黄瓜</a></li>
+                <li><a href="#">葫芦卜</a></li>
+                <li><a href="#">冬瓜</a></li>
+                <li><a href="#">芹菜</a></li>
+                <li><a href="#">香菜</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#" class="top-level">海鲜</a>
+            <ul>
+                <li><a href="#">龙虾</a></li>
+                <li><a href="#">扇贝</a></li>
+                <li><a href="#">鲍鱼</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="top-level">肉类</a>
+            <ul>
+                <li><a href="#">猪肉</a></li>
+                <li><a href="#">牛肉</a></li>
+                <li><a href="#">鸡肉</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="top-level">速冻</a>
+            <ul>
+                <li><a href="#">冰激凌</a></li>
+                <li><a href="#">湾仔码头</a></li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>
