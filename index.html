@@ -4,17 +4,17 @@
 <meta charset="UTF-8">
 <title>jsp</title>
 <style>
-.d1{
+.d1 {
 height: 120px;
 width: 320px;
 margin: 0 auto;
 }
-.d2{
+.d2 {
 height: 100px;
 width: 300px;
 margin: 0 auto;
 }
-.d3{
+.d3 {
 height: 300px;
 width: 300px;
 margin: 0 auto;
@@ -72,13 +72,13 @@ font-size:20px;
 color:#666;
 margin: 100px 100px;
 }
-.pop_footer{
+.pop_footer {
 height:54px;
 line-height:54px;
 text-align:center;
 color:#666;
 }
-.pop_footer span{
+.pop_footer span {
 color:red;
 padding:0 5px;
 }
@@ -92,6 +92,11 @@ left: 0;
 top: 0;
 opacity: 0.3;
 filter:alpha(opacity=30);
+}
+.blog {
+  a:link{color:blue}
+  a:visited{color:orange}
+  a:hover{color:purple}
 }
 </style>
 <script src="js/jquery-3.2.1.js"></script>
@@ -128,7 +133,7 @@ return false;
 <div class='d2'>欢迎光临！</div>
 <div class='d3'>
 <a target="_blank" href="http://jsp.im">jsp.im</a><br>
-<a target="_blank" href="http://www.jsp.im/blog" a:link=“blue” a:visited=“orange”>车车</a><br>
+<a target="_blank" href="http://www.jsp.im/blog" class='blog'>博客</a><br>
 <a target="_blank" href="http://www.jsp.im/music">发现音乐</a><br>
 <a target="_blank" href="http://www.jsp.im/rgb">RGB颜色值与十六进制颜色码转换工具</a><br>
 </div>
