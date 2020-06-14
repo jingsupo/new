@@ -1,168 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-<title>jsp</title>
-<style>
-.d1 {
-height: 120px;
-width: 320px;
-margin: 0 auto;
-}
-.d2 {
-height: 100px;
-width: 300px;
-margin: 0 auto;
-}
-.d3 {
-height: 300px;
-width: 300px;
-margin: 0 auto;
-}
-.pop_main {
-display: none;
-}
-.pop_con {
-width: 500px;
-height: 300px;
-background: #fff;
-border-radius: 3px;
-position:fixed;
-left:50%;
-top:50%;
-margin-left:-250px;
-margin-top:-150px;
-z-index: 9999;
-border:1px solid #f0f0f0;
-}
-.pop_title {
-width: 490px;
-height: 40px;
-background:#157bef;
-border-radius: 4px;
-margin: 5px auto;
-}
-.pop_title h3 {
-float: left;
-color: #fff;
-font-size: 18px;
-line-height: 40px;
-margin: 0;
-text-indent: 10px;
-}
-.pop_title a {
-float: right;
-width: 20px;
-height: 20px;
-border-radius: 4px;
-background: #fff;
-margin: 10px 10px;
-line-height: 20px;
-font-size: 20px;
-text-align: center;
-text-decoration: none;
-}
-.pop_detail {
-height: 200px;
-border-bottom:1px solid #f0f0f0;
-overflow: hidden;
-}
-.pop_text {
-font-size:20px;
-color:#666;
-margin: 100px 100px;
-}
-.pop_footer {
-height:54px;
-line-height:54px;
-text-align:center;
-color:#666;
-}
-.pop_footer span {
-color:red;
-padding:0 5px;
-}
-.mask {
-width: 100%;
-height: 100%;
-background: #666666;
-z-index: 9000;
-position: fixed;
-left: 0;
-top: 0;
-opacity: 0.3;
-filter:alpha(opacity=30);
-}
-.blog:link {
-color:blue
-}
-.blog:visited {
-color:#FF00FF
-}
-.blog:hover {
-color:#FF9100
-}
-</style>
-<script src="js/jquery-3.2.1.js"></script>
-<script src="js/jquery.color.js"></script>
-<script>
-$(function () {
-var $oBtn = $('#btn01'),
-$oPop = $('#pop'),
-$PopCon = $('.pop_con'),
-$oShutOff = $('#shutoff');
-
-$oBtn.click(function () {
-$oPop.fadeIn();
-return false;
-});
-$(window).click(function () {
-$oPop.fadeOut();
-});
-$PopCon.click(function () {
-return false;
-});
-$oShutOff.click(function () {
-$oPop.fadeOut();
-return false;
-})
-})
-</script>
-<title>jQuery</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <title>jsp</title>
+  <link rel="stylesheet" href="static/layui/css/layui.css" media="all">
+  <script src="static/js/jquery-3.2.1.js"></script>
+  <script src="static/js/jquery.color.js"></script>
+  <script src="static/layui/layui.js"></script>
 </head>
-
-<body background="images/wood.jpg">
-
-<div class='d1'><img alt="Welcome" border="0" src="images/welcome.jpg" width="300" height="100"></div>
-<div class='d2'>欢迎光临！</div>
-<div class='d3'>
-<a target="_blank" href="http://jsp.im">jsp.im</a><br>
-<a target="_blank" href="http://www.cnblogs.com/jingsupo/" class='blog'>博客</a><br>
-<a target="_blank" href="http://www.jsp.im/music">发现音乐</a><br>
-<a target="_blank" href="http://www.jsp.im/jsnotes">JavaScript教程</a><br>
-<a target="_blank" href="http://www.jsp.im/flasknotes">Flask教程</a><br>
-<a target="_blank" href="http://www.jsp.im/rgb">RGB颜色值与十六进制颜色码转换工具</a><br>
-</div>
-
-<div class="button" style="width: 200px; margin: 50px auto; text-align: center">
-<input type="button" value="点击我" id="btn01" style="width: 100px; height: 30px; background: #0181cc;
-color: #fff; font-size: 16px">
-</div>
-<div class="pop_main" id="pop">
-<div class="pop_con">
-<div class="pop_title">
-<h3>系统提示</h3>
-<a href="#" id="shutoff">×</a>
-</div>
-<div class="pop_detail">
-<p class="pop_text"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=592818&auto=1&height=66"></iframe></p>
-</div>
-<div class="pop_footer"><span>亲：</span>欢迎下次光临！</div>
-</div>
-<div class="mask"></div>
-</div>
-
+<body>
+  <div class="layui-tab layui-tab-card">
+    <ul class="layui-tab-title">
+      <li class="layui-this">导航</li>
+      <li>音乐</li>
+      <li>关于</li>
+    </ul>
+    <div class="layui-tab-content" style="height: 100px;">
+      <div class="layui-tab-item layui-show">
+        <a target="_blank" href="http://jsp.im">jsp.im</a><br>
+        <a target="_blank" href="http://www.cnblogs.com/jingsupo/" class='blog'>博客</a><br>
+        <a target="_blank" href="http://www.jsp.im/music">发现音乐</a><br>
+        <a target="_blank" href="http://www.jsp.im/jsnotes">JavaScript教程</a><br>
+        <a target="_blank" href="http://www.jsp.im/flasknotes">Flask教程</a><br>
+        <a target="_blank" href="http://www.jsp.im/rgb">RGB颜色值与十六进制颜色码转换工具</a><br>
+        <a target="_blank" href="http://www.jsp.im/picture-format-converter">picture-format-converter</a><br>
+      </div>
+      <div class="layui-tab-item">
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=592818&auto=1&height=66"></iframe>
+      </div>
+      <div class="layui-tab-item">关于</div>
+    </div>
+  </div>
 </body>
 </html>
-
