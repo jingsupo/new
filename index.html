@@ -8,15 +8,24 @@
   <script src="static/js/jquery-3.2.1.js"></script>
   <script src="static/js/jquery.color.js"></script>
   <script src="static/layui/layui.js"></script>
+  <script>
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        let element = layui.element;
+        // 监听Tab切换
+        element.on('tab(index)', function(data){
+        });
+    });
+  </script>
 </head>
 <body>
-  <div class="layui-tab layui-tab-card">
+  <div class="layui-tab layui-tab-card" lay-filter="index">
     <ul class="layui-tab-title">
       <li class="layui-this">导航</li>
       <li>音乐</li>
       <li>关于</li>
     </ul>
-    <div class="layui-tab-content" style="height: 100px;">
+    <div class="layui-tab-content" style="height: 300px;">
       <div class="layui-tab-item layui-show">
         <a target="_blank" href="http://jsp.im">jsp.im</a><br>
         <a target="_blank" href="http://www.cnblogs.com/jingsupo/" class='blog'>博客</a><br>
