@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+</head>
+<body style="height: 600px; margin: 0">
+    <div id="container" style="height: 100%"></div>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script> -->
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script> -->
+    <script type="text/javascript">
+        function randomData() {
+            now = new Date(+now + oneDay);
+            value = value + Math.random() * 20 - 10;
+            return {
+                name: now.toString(),
+                value: [
+                    //[now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+                    idx,
+                    Math.round(value)
+                ]
+            }
+        }
+
+        var data = [];
+        var now = +new Date(1997, 9, 3);
+        var oneDay = 24 * 3600 * 1000;
+        var value = Math.random() * 1000;
+        for (var i = 0; i < 100; i++) {
+            var idx = i;
+            data.push(randomData());
+        }
+
+        var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+        option = null;
+        option = {
+            color: ['blue'],
+            tooltip: {
+                trigger: 'axis',
+                triggerOn: 'mousemove|click',
+            },
+            xAxis: {
+                type: 'category',
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                markPoint: {
+                    data: [],
+                },
+                markLine: {
+                    data: [],
+                },
+                data: data,
+                type: 'line'
+            }],
+            toolbox: { // 工具栏
+                feature: {
+                    dataZoom: { // 框选缩放功能
+                        show: true, // show为true时，才能触发takeGlobalCursor事件
+                        yAxisIndex: 'none',
+                    },
+                    restore: {
+                        show: true
+                    },
+                    saveAsImage: {
+                        show: true,
+                        type: 'png',
+                    },
+                }
+            }
+        };
+
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+
+        // 添加标注点
+        function addmarkPoint (fig, params) {
+            if (params.componentType !== 'series') return;
+            let x = params.dataIndex;
+            let y = params.value;
+            let op = fig.getOption();
+            let markPointData = [];
+            let interval = 5;
+            let points = [-5, -4, -3, -2, -1, 'x', 1, 2, 3, 4, 5];
+            let distance = [-5*interval, -4*interval, -3*interval, -2*interval, -1*interval, 0, 1*interval, 2*interval, 3*interval, 4*interval, 5*interval];
+            for (let i = 0; i < distance.length; i++) {
+                if (typeof op.series[0].data[x+distance[i]] !== "undefined") {
+                    markPointData.push({
+                        //name: `x:${x}\ny:${y}`,
+                        name: points[i],
+                        coord: [x+distance[i], op.series[0].data[x+distance[i]].value[1]],
+                        label: {
+                            show: true,
+                            //formatter: `x:${x}\ny:${y}`,
+                            formatter: '{b}',
+                            position: 'top'
+                        },
+                        //symbolSize: 6,
+                        symbolSize: [5, 90],
+                        //symbol: 'rect',
+                        //symbol: 'image://icon.png',
+                        //symbol:'path://M0 0 h 300 v -20 l 80 40 l -80 40 v -20 h -300 z',
+                        symbol:'path://M0 0 v 300 h -20 l 40 80 l 40 -80 h -20 v -300 z',
+                        symbolOffset: ['0%', '-50%'],
+                        symbolKeepAspect: true,// 如果 symbol 是 path:// 的形式，是否在缩放时保持该图形的长宽比。
+                        itemStyle: {
+                            color: 'red'
+                        }
+                    });
+                }
+            }
+            let series = op.series;
+            series[params.seriesIndex] = {
+                markPoint: {
+                    data: markPointData
+                }
+            };
+            fig.setOption({
+                series: series
+            });
+        }
+
+        myChart.on('click', (params) => {
+            addmarkPoint(myChart, params);
+        });
+    </script>
+</body>
+</html>
