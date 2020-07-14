@@ -2,9 +2,6 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-</head>
-<body style="height: 600px; margin: 0">
-    <div id="container" style="height: 100%"></div>
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
@@ -12,7 +9,39 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script> -->
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script> -->
-    <script type="text/javascript">
+    <script>
+        $(document).ready(function () {
+            document.getElementById('refer-label').style.display='none';
+            document.getElementById('refer').style.display='none';
+            document.getElementById('dist-label').style.display='none';
+            document.getElementById('dist').style.display='none';
+
+            $("#md").click(function () {
+                if ($('#md').prop('checked')) {
+                    document.getElementById('refer-label').style.display='';
+                    document.getElementById('refer').style.display='';
+                    document.getElementById('dist-label').style.display='';
+                    document.getElementById('dist').style.display='';
+                }
+                else {
+                    document.getElementById('refer-label').style.display='none';
+                    document.getElementById('refer').style.display='none';
+                    document.getElementById('dist-label').style.display='none';
+                    document.getElementById('dist').style.display='none';
+                }
+            });
+
+        });
+    </script>
+</head>
+<body style="height: 600px; margin: 0">
+    <div>
+        <label for="md">测距</label><input type="checkbox" id="md">
+        <label for="refer" id="refer-label">设置参考点</label><input type="checkbox" id="refer">
+        <label for="dist" id="dist-label">距离：</label><input type="text" id="dist">
+    </div>
+    <div id="container" style="height: 100%"></div>
+    <script>
         function randomData() {
             now = new Date(+now + oneDay);
             value = value + Math.random() * 20 - 10;
@@ -45,20 +74,23 @@
                 triggerOn: 'mousemove|click',
             },
             xAxis: {
-                type: 'category',
+                type: 'value',
+                max: 'dataMax',
+                splitNumber: 10,
             },
             yAxis: {
-                type: 'value'
+                type: 'value',
+                splitNumber: 5,
             },
             series: [{
+                type: 'line',
                 markPoint: {
                     data: [],
                 },
                 markLine: {
                     data: [],
                 },
-                data: data,
-                type: 'line'
+                data: data
             }],
             toolbox: { // 工具栏
                 feature: {
@@ -128,8 +160,25 @@
             });
         }
 
+        let refer = null;
+        function measuringDistance (params) {
+            if ($('#md').prop('checked')) {
+                if ($('#refer').prop('checked')) {
+                    refer = params.value[0];
+                }
+                else {
+                    if (refer === null) {
+                        refer = 0;
+                    }
+                }
+                let dist = params.value[0] - refer;
+                $('#dist').val(dist);
+            }
+        }
+
         myChart.on('click', (params) => {
             addmarkPoint(myChart, params);
+            measuringDistance(params);
         });
     </script>
 </body>
