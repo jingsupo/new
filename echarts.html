@@ -2,13 +2,14 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8">
+    <title>ECharts</title>
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script> -->
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script> -->
     <script>
         $(document).ready(function () {
             document.getElementById('refer-label').style.display='none';
@@ -36,6 +37,7 @@
 </head>
 <body style="height: 600px; margin: 0">
     <div>
+        <label for="sb">边频带</label><input type="checkbox" id="sb">
         <label for="md">测距</label><input type="checkbox" id="md">
         <label for="refer" id="refer-label">设置参考点</label><input type="checkbox" id="refer">
         <label for="dist" id="dist-label">距离：</label><input type="text" id="dist">
@@ -55,19 +57,18 @@
             }
         }
 
-        var data = [];
-        var now = +new Date(1997, 9, 3);
-        var oneDay = 24 * 3600 * 1000;
-        var value = Math.random() * 1000;
-        for (var i = 0; i < 100; i++) {
+        let data = [];
+        let now = +new Date(1997, 9, 3);
+        let oneDay = 24 * 3600 * 1000;
+        let value = Math.random() * 1000;
+        for (let i = 0; i < 100; i++) {
             var idx = i;
             data.push(randomData());
         }
 
-        var dom = document.getElementById("container");
-        var myChart = echarts.init(dom);
-        option = null;
-        option = {
+        let dom = document.getElementById("container");
+        let myChart = echarts.init(dom);
+        let option = {
             color: ['blue'],
             tooltip: {
                 trigger: 'axis',
@@ -122,20 +123,17 @@
             let markPointData = [];
             let interval = 5;
             let points = [-5, -4, -3, -2, -1, 'x', 1, 2, 3, 4, 5];
-            let distance = [-5*interval, -4*interval, -3*interval, -2*interval, -1*interval, 0, 1*interval, 2*interval, 3*interval, 4*interval, 5*interval];
+            let distance = [-5*interval, -4*interval, -3*interval, -2*interval, -1*interval, 0, interval, 2*interval, 3*interval, 4*interval, 5*interval];
             for (let i = 0; i < distance.length; i++) {
                 if (typeof op.series[0].data[x+distance[i]] !== "undefined") {
                     markPointData.push({
-                        //name: `x:${x}\ny:${y}`,
                         name: points[i],
                         coord: [x+distance[i], op.series[0].data[x+distance[i]].value[1]],
                         label: {
                             show: true,
-                            //formatter: `x:${x}\ny:${y}`,
                             formatter: '{b}',
                             position: 'top'
                         },
-                        //symbolSize: 6,
                         symbolSize: [5, 90],
                         //symbol: 'rect',
                         //symbol: 'image://icon.png',
@@ -160,6 +158,7 @@
             });
         }
 
+        // 定义参考点
         let refer = null;
         function measuringDistance (params) {
             if ($('#md').prop('checked')) {
@@ -177,7 +176,9 @@
         }
 
         myChart.on('click', (params) => {
-            addmarkPoint(myChart, params);
+            if ($('#sb').prop('checked')) {
+                addmarkPoint(myChart, params);
+            }
             measuringDistance(params);
         });
     </script>
